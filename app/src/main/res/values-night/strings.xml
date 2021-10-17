@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Weather App Sergio</string>
     <string name="city_name">City Name</string>
     <string name="lookup">Lookup</string>
     <string name="show_details">Show Details</string>

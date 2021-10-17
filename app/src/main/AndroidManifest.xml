@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.weatherappsergio">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherAppSergio">
+        <activity
+            android:name=".DisplayForecastDetails"
+            android:exported="false"
+            android:label="@string/city_name"
+            android:parentActivityName=".DisplayForecast">
+            <!-- The meta-com.example.weatherappsergio.data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DisplayForecast" />
+        </activity>
+        <activity
+            android:name=".DisplayForecast"
+            android:exported="false"
+            android:label="@string/city_name"
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-com.example.weatherappsergio.data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
