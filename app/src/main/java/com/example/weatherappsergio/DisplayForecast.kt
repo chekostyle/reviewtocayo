@@ -20,8 +20,8 @@ class DisplayForecast : AppCompatActivity() {
         setContentView(binding.root)
         binding.showDetailsButton.setOnClickListener { displayForecastDetails() }
 
+        val city = intent.getStringExtra(CITY).toString()
         GlobalScope.launch(Dispatchers.Main) {
-            val city = intent.getStringExtra(CITY).toString()
             //Get the data from the weather API
             val apiService = OpenWeatherMapApiService()
             val currentWeatherResponse = apiService.getCurrentWeather(city).await()
