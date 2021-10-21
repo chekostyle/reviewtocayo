@@ -1,6 +1,6 @@
-package com.example.weatherappsergio.data
+package com.example.weatherappsergio.network
 
-import com.example.weatherappsergio.data.response.CurrentWeatherResponse
+import com.example.weatherappsergio.network.response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -17,7 +17,7 @@ const val APP_ID = "65d00499677e59496ca2f318eb68c049"
 interface OpenWeatherMapApiService {
 
     @GET("forecast")
-    fun getCurrentWeather(
+    fun getCurrentWeatherAsync(
         @Query("q") location: String
     ): Deferred<CurrentWeatherResponse>
 

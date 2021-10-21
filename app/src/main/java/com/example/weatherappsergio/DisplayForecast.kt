@@ -3,40 +3,27 @@ package com.example.weatherappsergio
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.weatherappsergio.MainActivity.Companion.CITY
-import com.example.weatherappsergio.data.OpenWeatherMapApiService
+import androidx.databinding.DataBindingUtil
+import com.example.weatherappsergio.constants.SELECTED_CITY
 import com.example.weatherappsergio.databinding.ActivityDisplayForecastBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.weatherappsergio.viewmodels.DisplayForecastViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DisplayForecast : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDisplayForecastBinding
+    private val viewModel: DisplayForecastViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDisplayForecastBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.showDetailsButton.setOnClickListener { displayForecastDetails() }
-
-        val city = intent.getStringExtra(CITY).toString()
-        GlobalScope.launch(Dispatchers.Main) {
-            //Get the data from the weather API
-            val apiService = OpenWeatherMapApiService()
-            val currentWeatherResponse = apiService.getCurrentWeather(city).await()
-            val temperaturesData = currentWeatherResponse.list[0].main
-            val degreesScale = getString(R.string.fahrenheit_degrees)
-            binding.temperatureDegrees.text = temperaturesData.temp.toString() + degreesScale
-            binding.temperatureDegreesMax.text = temperaturesData.temp_max.toString() + degreesScale
-            binding.temperatureDegreesMin.text = temperaturesData.temp_min.toString() + degreesScale
-        }
+        val binding = DataBindingUtil.setContentView<ActivityDisplayForecastBinding>(this, R.layout.activity_display_forecast)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        binding.view = this
     }
 
-    private fun displayForecastDetails() {
-        val city = intent.getStringExtra(CITY).toString()
+    fun displayForecastDetails(city: String?) {
         val intent = Intent(this, DisplayForecastDetails::class.java).apply {
-            putExtra(CITY, city)
+            putExtra(SELECTED_CITY, city)
         }
         startActivity(intent)
     }
