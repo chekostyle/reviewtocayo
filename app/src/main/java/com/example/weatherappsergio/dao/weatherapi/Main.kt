@@ -1,4 +1,4 @@
-package com.example.weatherappsergio.network.response
+package com.example.weatherappsergio.dao.weatherapi
 
 data class Main(
     val feels_like: Double,

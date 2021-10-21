@@ -1,4 +1,4 @@
-package com.example.weatherappsergio.network.response
+package com.example.weatherappsergio.dao.weatherapi
 
 data class Coord(
     val lat: Double,
